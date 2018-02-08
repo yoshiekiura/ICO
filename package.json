@@ -1,0 +1,26 @@
+{
+  "name": "napoleonxtoken",
+  "version": "1.0.0",
+  "description": "NapoleonX.ai Ethereum smart contract for crowdsale and its test suite",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "author": "NapoleonX team",
+  "license": "MIT",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "async": "^2.5.0",
+    "bignumber": "^1.1.0",
+    "bignumber.js": "^4.0.2",
+    "command-line-args": "^4.0.7",
+    "ethereumjs-testrpc": "^4.0.1",
+    "ethereumjs-abi": "^0.6.4",
+    "fs": "0.0.2",
+    "js-sha256": "^0.6.0",
+    "mocha": "^3.5.0",
+    "request": "^2.74.0",
+    "solc": "^0.4.15",
+    "web3": "^0.20.0"
+  }
+}
