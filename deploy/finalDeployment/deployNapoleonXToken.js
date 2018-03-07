@@ -392,19 +392,19 @@ var napoleonxTokenAbi = [
 // be careful months start at 0
 // var d = new Date(2017,08,29);
 var d = new Date(2018,03,15);
-var setStartTime = d.getTime();
+var setEndTime = d.getTime();
 
 var napoleonxTokenGasEstimate = web3.eth.estimateGas({
     data: napoleonxTokenByteCode
 });
 
 console.log(napoleonxTokenGasEstimate);
-web3.personal.unlockAccount(account,unlockingPassword);
+web3.personal.unlockAccount(account,unlockingPassword,"0x3e88");
 console.log(account);
 
 var napoleonxTokenContract = web3.eth.contract(napoleonxTokenAbi);
 var napoleonxTokenContractInstance = napoleonxTokenContract.new(
-   setStartTime,
+   setEndTime,
    {
      from : account,
      data : napoleonxTokenByteCode,
