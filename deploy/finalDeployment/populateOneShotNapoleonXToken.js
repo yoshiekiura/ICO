@@ -409,7 +409,7 @@ for (var i = 0; i < data.length; i++) {
 	var myAmount = parseInt(fields[1]);
 	var myAddress = fields[0];
 
-	console.log("Handling@Whitelisted@"+whitelisted.length);
+	console.log("Handling@Whitelisted@"+myAddress);
 	console.log("Sending populating batch");
 	console.log("Batch gas estimation");
 
@@ -419,9 +419,9 @@ for (var i = 0; i < data.length; i++) {
 
   //var napoleonXWhitelistPopulateDataEstimate = web3.eth.getBlock("latest").gasLimit;
 
-  console.log(napoleonXWhitelistPopulateDataEstimate);
+  //console.log(napoleonXWhitelistPopulateDataEstimate);
 
-	var populateWhiteList_transaction = napoleonXWhitelist.transfer.sendTransaction(myAddress, myAmount, {
+	var populateWhiteList_transaction = napoleonXToken.transfer.sendTransaction(myAddress, myAmount, {
 			from: account,
 			gas: 59000,
 			gasPrice: 50000000000
