@@ -397,7 +397,7 @@ console.log(napoleonXToken.name());
 
 
 // Synchronous read
-var data = fs.readFileSync('./data/presales_token_clean_1.csv').toString().split('\n');
+var data = fs.readFileSync('./data/presales_token_clean_1.csv').toString().split('\r\n');
 
 
 // Looping and batch sending
