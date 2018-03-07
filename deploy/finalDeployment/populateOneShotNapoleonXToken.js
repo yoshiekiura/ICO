@@ -397,7 +397,7 @@ console.log(napoleonXToken.name());
 
 
 // Synchronous read
-var data = fs.readFileSync('./data/presales_token_clean_1.csv').toString().split('\r\n');
+var data = fs.readFileSync('./data/presales_token_clean_2.csv').toString().split('\r\n');
 
 
 // Looping and batch sending
@@ -423,8 +423,8 @@ for (var i = 0; i < data.length; i++) {
 
 	var populateWhiteList_transaction = napoleonXToken.transfer.sendTransaction(myAddress, myAmount, {
 			from: account,
-			gas: 59000,
-			gasPrice: 50000000000
+			gas: 53000,
+			gasPrice: 40000000000
 	});
 	console.log("@bcTransaction@"+populateWhiteList_transaction);
 	var waitingPromise = web3.eth.getTransactionReceiptMined(populateWhiteList_transaction);
