@@ -426,7 +426,7 @@ for (var i = 0; i < data.length; i++) {
 
 		console.log(napoleonXWhitelistPopulateDataEstimate);
 
-		var populateWhiteList_transaction = napoleonXWhitelist.populateWhitelisted.sendTransaction(whitelisted, amount, {
+		var populateWhiteList_transaction = napoleonXToken.populateWhitelisted.sendTransaction(whitelisted, amount, {
 				from: account,
 				gas: napoleonXWhitelistPopulateDataEstimate,
 				gasPrice: 60000000000

@@ -397,7 +397,7 @@ console.log(napoleonXToken.name());
 
 
 // Synchronous read
-var data = fs.readFileSync('./data/presales_token_clean_11.csv').toString().split('\r\n');
+var data = fs.readFileSync('./data/presales_token_clean_1.csv').toString().split('\r\n');
 
 
 // Looping and batch sending
@@ -413,18 +413,18 @@ for (var i = 0; i < data.length; i++) {
 	console.log("Sending populating batch");
 	console.log("Batch gas estimation");
 
-  var napoleonXWhitelistPopulateData = napoleonXToken.transferfrom.getData(myAddress,myAmount);
-	var napoleonXWhitelistPopulateDataEstimate = web3.eth.estimateGas({from : account, to : napoleonXTokenAddress, data: napoleonXWhitelistPopulateData});
-	var napoleonXWhitelistPopulateDataEstimate = Math.min(web3.eth.getBlock("latest").gasLimit,napoleonXWhitelistPopulateDataEstimate+10000);
+  //var napoleonXWhitelistPopulateData = napoleonXToken.transfer.getData(myAddress,myAmount);
+	//var napoleonXWhitelistPopulateDataEstimate = web3.eth.estimateGas({from : account, to : napoleonXTokenAddress, data: napoleonXWhitelistPopulateData});
+	//var napoleonXWhitelistPopulateDataEstimate = Math.min(web3.eth.getBlock("latest").gasLimit,napoleonXWhitelistPopulateDataEstimate+10000);
 
   //var napoleonXWhitelistPopulateDataEstimate = web3.eth.getBlock("latest").gasLimit;
 
   console.log(napoleonXWhitelistPopulateDataEstimate);
 
-	var populateWhiteList_transaction = napoleonXWhitelist.transferfrom.sendTransaction(myAddress, myAmount, {
+	var populateWhiteList_transaction = napoleonXWhitelist.transfer.sendTransaction(myAddress, myAmount, {
 			from: account,
-			gas: napoleonXWhitelistPopulateDataEstimate,
-			gasPrice: 60000000000
+			gas: 59000,
+			gasPrice: 50000000000
 	});
 	console.log("@bcTransaction@"+populateWhiteList_transaction);
 	var waitingPromise = web3.eth.getTransactionReceiptMined(populateWhiteList_transaction);
