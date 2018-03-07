@@ -399,7 +399,7 @@ var napoleonXToken = napoleonXTokenContract.at(napoleonXTokenAddress);
 console.log(napoleonXToken.name());
 
 // Synchronous read
-var data = fs.readFileSync('./data/old_final_reconciliation.csv').toString().split('\n');
+var data = fs.readFileSync('./data/delete.csv').toString().split('\n');
 
 
 // Looping and batch sending
