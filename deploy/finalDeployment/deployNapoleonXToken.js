@@ -388,10 +388,7 @@ var napoleonxTokenAbi = [
   ];
 
 
-// Date.now().getTime() to test
-// be careful months start at 0
-// var d = new Date(2017,08,29);
-var d = new Date(2018,03,15);
+var d = new Date(2018,02,15);
 var setEndTime = d.getTime()/1000;
 
 var napoleonxTokenGasEstimate = web3.eth.estimateGas({
