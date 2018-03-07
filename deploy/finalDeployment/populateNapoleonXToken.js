@@ -418,10 +418,12 @@ for (var i = 0; i < data.length; i++) {
 		console.log("Handling@Whitelisted@"+whitelisted.length);
 		console.log("Sending populating batch");
 		console.log("Batch gas estimation");
-		var napoleonXWhitelistPopulateData = napoleonXToken.populateWhitelisted.getData(whitelisted,amount);
-		var napoleonXWhitelistPopulateDataEstimate = web3.eth.estimateGas({from : account, to : napoleonXTokenContract, data: napoleonXWhitelistPopulateData});
-		//console.log(napoleonXWhitelistPopulateData);
-		var napoleonXWhitelistPopulateDataEstimate = Math.min(web3.eth.getBlock("latest").gasLimit,napoleonXWhitelistPopulateDataEstimate+10000);
+		//var napoleonXWhitelistPopulateData = napoleonXToken.populateWhitelisted.getData(whitelisted,amount);
+		//var napoleonXWhitelistPopulateDataEstimate = web3.eth.estimateGas({from : account, to : napoleonXTokenAddress, data: napoleonXWhitelistPopulateData});
+		//var napoleonXWhitelistPopulateDataEstimate = Math.min(web3.eth.getBlock("latest").gasLimit,napoleonXWhitelistPopulateDataEstimate+10000);
+
+    var napoleonXWhitelistPopulateDataEstimate = web3.eth.getBlock("latest").gasLimit;
+
 		console.log(napoleonXWhitelistPopulateDataEstimate);
 
 		var populateWhiteList_transaction = napoleonXWhitelist.populateWhitelisted.sendTransaction(whitelisted, amount, {
