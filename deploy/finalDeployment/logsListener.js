@@ -399,8 +399,15 @@ var napoleonXToken = napoleonXTokenContract.at(napoleonXTokenAddress);
 console.log(napoleonXToken.name());
 
 
-var transferEvent = napoleonXToken.TokenAllocated({}, {fromBlock: 0, toBlock: 'latest'})
-transferEvent.get((error, logs) => {
+var updateEvent = napoleonXToken.TokenAllocated({}, {fromBlock: 0, toBlock: 'latest'})
+updateEvent.get((error, logs) => {
   // we have the logs, now print them
   logs.forEach(log => console.log(log.args["investor"]+","+log.args["tokenAmount"] ))
+});
+
+
+var transferEvent = napoleonXToken.Transfer({}, {fromBlock: 0, toBlock: 'latest'})
+transferEvent.get((error, logs) => {
+  // we have the logs, now print them
+  logs.forEach(log => console.log(log.args["to"]+","+log.args["from"]+","+log.args["value"] ))
 });
