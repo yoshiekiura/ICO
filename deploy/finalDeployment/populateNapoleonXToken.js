@@ -441,19 +441,3 @@ for (var i = 0; i < data.length; i++) {
 		counter = 0;
 	}
 }
-console.log("Handling@Whitelisted@"+whitelisted.length);
-console.log("Sending populating batch");
-console.log("Batch gas estimation");
-var napoleonXWhitelistPopulateData = napoleonXWhitelist.populateWhitelisted.getData(whitelisted,amount);
-var napoleonXWhitelistPopulateDataEstimate = web3.eth.estimateGas({from : account, to : napoleonXWhitelistAddress, data: napoleonXWhitelistPopulateData});
-//console.log(napoleonXWhitelistPopulateData);
-var napoleonXWhitelistPopulateDataEstimate = Math.min(web3.eth.getBlock("latest").gasLimit,napoleonXWhitelistPopulateDataEstimate+10000);
-console.log(napoleonXWhitelistPopulateDataEstimate);
-
-var populateWhiteList_transaction = napoleonXWhitelist.populateWhitelisted.sendTransaction(whitelisted,amount, {
-    from: account,
-    gas: napoleonXWhitelistPopulateDataEstimate,
-  	gasPrice: 60000000000
-});
-console.log("@bcTransaction@"+populateWhiteList_transaction);
-var MyPopulateWhiteListReceipt = web3.eth.getTransactionReceiptMined(populateWhiteList_transaction);
