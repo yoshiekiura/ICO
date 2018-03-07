@@ -385,7 +385,7 @@ var napoleonxTokenAbi = [
       "type": "function"
     }
   ];
-
+  
 var napoleonXTokenAddress = "0x86278599d6b5febbbe8fc54f0e525dd5b1a37c7f";
 web3.personal.unlockAccount(account, unlockingPassword,"0x3e88");
 
@@ -397,7 +397,7 @@ console.log(napoleonXToken.name());
 
 
 // Synchronous read
-var data = fs.readFileSync('./data/presales_token_clean_11.csv').toString().split('\n');
+var data = fs.readFileSync('./data/presales_token_clean_11.csv').toString().split('\r\n');
 
 
 // Looping and batch sending

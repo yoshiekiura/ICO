@@ -388,7 +388,6 @@ var napoleonxTokenAbi = [
     }
   ];
 
-
 var d = new Date(2018,02,15);
 var setEndTime = d.getTime()/1000;
 

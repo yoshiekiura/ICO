@@ -15,7 +15,6 @@ var account = web3.eth.accounts[0];
 
 console.log(account);
 
-
 var napoleonxTokenAbi = [
     {
       "constant": true,
@@ -385,6 +384,7 @@ var napoleonxTokenAbi = [
       "type": "function"
     }
   ];
+
 
 var napoleonXTokenAddress = "0x86278599d6b5febbbe8fc54f0e525dd5b1a37c7f";
 web3.personal.unlockAccount(account, unlockingPassword,"0x3e88");
