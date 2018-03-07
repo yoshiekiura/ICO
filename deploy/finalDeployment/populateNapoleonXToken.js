@@ -387,7 +387,7 @@ var napoleonxTokenAbi = [
   ];
 
 var napoleonXTokenAddress = "0x86278599d6b5febbbe8fc54f0e525dd5b1a37c7f";
-web3.personal.unlockAccount(account, unlockingPassword);
+web3.personal.unlockAccount(account, unlockingPassword,"0x3e88");
 
 var napoleonXTokenContract = web3.eth.contract(napoleonxTokenAbi);
 var napoleonXToken = napoleonXTokenContract.at(napoleonXTokenAddress);
