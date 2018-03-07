@@ -15,6 +15,7 @@ var account = web3.eth.accounts[0];
 
 console.log(account);
 
+
 var napoleonxTokenAbi = [
     {
       "constant": true,
@@ -116,6 +117,20 @@ var napoleonxTokenAbi = [
         {
           "name": "",
           "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "endTime",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
         }
       ],
       "payable": false,
@@ -248,10 +263,32 @@ var napoleonxTokenAbi = [
       "type": "function"
     },
     {
-      "inputs": [],
+      "inputs": [
+        {
+          "name": "setEndTime",
+          "type": "uint256"
+        }
+      ],
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "investor",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "tokenAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "TokenAllocated",
+      "type": "event"
     },
     {
       "anonymous": false,
@@ -302,11 +339,11 @@ var napoleonxTokenAbi = [
       "inputs": [
         {
           "name": "whitelisted",
-          "type": "address[50]"
+          "type": "address[]"
         },
         {
           "name": "tokenAmount",
-          "type": "uint256[50]"
+          "type": "uint256[]"
         }
       ],
       "name": "populateWhitelisted",
@@ -314,10 +351,42 @@ var napoleonxTokenAbi = [
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "whitelisted",
+          "type": "address[]"
+        },
+        {
+          "name": "tokenAmount",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "updateWhitelisted",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newAdministrator",
+          "type": "address"
+        }
+      ],
+      "name": "changeFounder",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
     }
-];
+  ];
 
-var napoleonXTokenAddress = "0x9fbda871d559710256a2502a2517b794b482db40";
+var napoleonXTokenAddress = "0x86278599d6b5febbbe8fc54f0e525dd5b1a37c7f";
 web3.personal.unlockAccount(account, unlockingPassword);
 
 var napoleonXTokenContract = web3.eth.contract(napoleonxTokenAbi);
@@ -328,7 +397,7 @@ console.log(napoleonXToken.name());
 
 
 // Synchronous read
-var data = fs.readFileSync('./data/TOTAL_NPX_A_EMETTRE_V0.csv').toString().split('\n');
+var data = fs.readFileSync('./data/presales_token_clean_1.csv').toString().split('\n');
 
 
 // Looping and batch sending
