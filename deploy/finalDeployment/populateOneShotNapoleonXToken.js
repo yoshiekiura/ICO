@@ -397,9 +397,9 @@ console.log(napoleonXToken.name());
 
 
 // Synchronous read
-var data = fs.readFileSync('./data/contributor_file1.csv').toString().split('\r\n');
+var data = fs.readFileSync('./data/contributor_file1.csv').toString().split('\n');
 
-
+data.length = 100
 // Looping and batch sending
 
 var napoleonXWhitelistPopulateDataEstimate;
