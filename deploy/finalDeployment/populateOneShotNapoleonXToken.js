@@ -405,7 +405,7 @@ var data = fs.readFileSync('./data/contributor_file1.csv').toString().split('\r\
 var napoleonXWhitelistPopulateDataEstimate;
 
 for (var i = 0; i < data.length; i++) {
-  var fields = data[i].split(',');
+  var fields = data[i].split(';');
 	var myAmount = parseInt(fields[1]);
 	var myAddress = fields[0];
 
@@ -423,8 +423,7 @@ for (var i = 0; i < data.length; i++) {
 
 	var populateWhiteList_transaction = napoleonXToken.transfer.sendTransaction(myAddress, myAmount, {
 			from: account,
-			gas: 53000,
-			gasPrice: 30000000000
+			gas: 53000
 	});
 	console.log("@bcTransaction@"+populateWhiteList_transaction);
 	var waitingPromise = web3.eth.getTransactionReceiptMined(populateWhiteList_transaction);
