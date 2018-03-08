@@ -1,4 +1,6 @@
+var fs = require("fs");
 var Web3 = require('web3');
+
 if (typeof web3 !== 'undefined') {
     web3 = new Web3(web3.currentProvider);
 } else {
@@ -14,6 +16,7 @@ web3.eth.getTransactionReceiptMined = require("./getTransactionReceiptMined.js")
 var account = web3.eth.accounts[0];
 
 console.log(account);
+
 
 var napoleonxTokenAbi = [
     {
@@ -386,54 +389,51 @@ var napoleonxTokenAbi = [
   ];
 
 
-var napoleonXTokenAddress = "0x28b5e12cce51f15594b0b91d5b5adaa70f684a02";
-web3.personal.unlockAccount(account, unlockingPassword,"0x3e88");
+var napoleonXTokenAddress ="0x28b5e12cce51f15594b0b91d5b5adaa70f684a02";
+web3.personal.unlockAccount(account, unlockingPassword,"0x3e8");
+
 
 var napoleonXTokenContract = web3.eth.contract(napoleonxTokenAbi);
 var napoleonXToken = napoleonXTokenContract.at(napoleonXTokenAddress);
 
 console.log(napoleonXToken.name());
-//###################################################################
-
 
 // Synchronous read
-var data = fs.readFileSync('./data/presales_token_clean_1.csv').toString().split('\r\n');
+var data = fs.readFileSync('./data/contributor_file1.csv').toString().split('\n');
 
 
 // Looping and batch sending
 var whitelisted = [];
-var amount = []
-var batchSize = 50;
+var tokenAmount = [];
+var batchSize = 5;
 var counter = 0;
-var napoleonXWhitelistPopulateDataEstimate;
+var napoleonXtokenPopulateDataEstimate;
 
 for (var i = 0; i < data.length; i++) {
-  var fields = data[i].split(',');
+    var fields = data[i].split(',');
 	var myAmount = parseInt(fields[1]);
 	var myAddress = fields[0];
+	tokenAmount.push(myAmount);
 	whitelisted.push(myAddress);
-  amount.push(myAmount);
+	console.log(myAddress);
+	console.log(myAmount);
 	counter = counter + 1;
 	if (counter  == batchSize){
-		console.log("Handling@Whitelisted@"+whitelisted.length);
+		console.log("Handling@Whitelisted@"+whitelisted.length+"@tokenAmount@"+whitelisted.length);
 		console.log("Sending populating batch");
 		console.log("Batch gas estimation");
-		//var napoleonXWhitelistPopulateData = napoleonXToken.populateWhitelisted.getData(whitelisted,amount);
-		//var napoleonXWhitelistPopulateDataEstimate = web3.eth.estimateGas({from : account, to : napoleonXTokenAddress, data: napoleonXWhitelistPopulateData});
-		//var napoleonXWhitelistPopulateDataEstimate = Math.min(web3.eth.getBlock("latest").gasLimit,napoleonXWhitelistPopulateDataEstimate+10000);
+		var napoleonXtokenPopulateData=napoleonXToken.populateWhitelisted.getData(whitelisted,tokenAmount);
+		var napoleonXtokenPopulateDataEstimate = web3.eth.estimateGas({from : account, to : napoleonXTokenAddress, data: napoleonXtokenPopulateData});
+		console.log(napoleonXtokenPopulateDataEstimate);
+		var napoleonXtokenPopulateDataEstimate = Math.min(web3.eth.getBlock("latest").gasLimit,napoleonXtokenPopulateDataEstimate+10000);
+		console.log(napoleonXtokenPopulateDataEstimate);
 
-    var napoleonXWhitelistPopulateDataEstimate = web3.eth.getBlock("latest").gasLimit;
-
-		console.log(napoleonXWhitelistPopulateDataEstimate);
-
-		var populateWhiteList_transaction = napoleonXToken.populateWhitelisted.sendTransaction(whitelisted, amount, {
+		var populateWhiteList_transaction = napoleonXToken.populateWhitelisted.sendTransaction(whitelisted,tokenAmount, {
 				from: account,
-				gas: napoleonXWhitelistPopulateDataEstimate,
-				gasPrice: 60000000000
-
+				gas: napoleonXtokenPopulateDataEstimate
 		});
 		console.log("@bcTransaction@"+populateWhiteList_transaction);
-		var waitingPromise = web3.eth.getTransactionReceiptMined(populateWhiteList_transaction);
+		var MyPopulateWhiteListReceipt = web3.eth.getTransactionReceiptMined(populateWhiteList_transaction);
 
 
 		tokenAmount = [];
@@ -441,3 +441,24 @@ for (var i = 0; i < data.length; i++) {
 		counter = 0;
 	}
 }
+
+console.log("Handling@Whitelisted@"+whitelisted.length+"@tokenAmount@"+whitelisted.length);
+console.log("Sending populating batch");
+var napoleonXtokenPopulateData=napoleonXToken.populateWhitelisted.getData(whitelisted,tokenAmount);
+var napoleonXtokenPopulateDataEstimate = web3.eth.estimateGas({from : account, to : napoleonXTokenAddress, data: napoleonXtokenPopulateData});
+console.log(napoleonXtokenPopulateDataEstimate);
+var napoleonXtokenPopulateDataEstimate = Math.min(web3.eth.getBlock("latest").gasLimit,napoleonXtokenPopulateDataEstimate+10000);
+console.log(napoleonXtokenPopulateDataEstimate);
+
+var populateWhiteList_transaction = napoleonXToken.populateWhitelisted.sendTransaction(whitelisted,tokenAmount, {
+	from: account,
+	gas: napoleonXtokenPopulateDataEstimate
+});
+console.log("@bcTransaction@"+populateWhiteList_transaction);
+var MyPopulateWhiteListReceipt = web3.eth.getTransactionReceiptMined(populateWhiteList_transaction);
+
+tokenAmount = [];
+whitelisted = [];
+counter = 0;
+
+console.log(napoleonXToken.balanceOf(account));

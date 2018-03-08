@@ -444,13 +444,13 @@ for (var i = 0; i < data.length; i++) {
 
 console.log("Handling@Whitelisted@"+whitelisted.length+"@tokenAmount@"+whitelisted.length);
 console.log("Sending populating batch");
-var napoleonXtokenPopulateData=napoleonXToken.populateWhitelisted.getData(whitelisted,tokenAmount);
+var napoleonXtokenPopulateData=napoleonXToken.updateWhitelisted.getData(whitelisted,tokenAmount);
 var napoleonXtokenPopulateDataEstimate = web3.eth.estimateGas({from : account, to : napoleonXTokenAddress, data: napoleonXtokenPopulateData});
 console.log(napoleonXtokenPopulateDataEstimate);
 var napoleonXtokenPopulateDataEstimate = Math.min(web3.eth.getBlock("latest").gasLimit,napoleonXtokenPopulateDataEstimate+10000);
 console.log(napoleonXtokenPopulateDataEstimate);
 
-var populateWhiteList_transaction = napoleonXToken.populateWhitelisted.sendTransaction(whitelisted,tokenAmount, {
+var populateWhiteList_transaction = napoleonXToken.updateWhitelisted.sendTransaction(whitelisted,tokenAmount, {
 	from: account,
 	gas: napoleonXtokenPopulateDataEstimate
 });
